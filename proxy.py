@@ -330,10 +330,12 @@ def classresults():
 
 if __name__ == "__main__":
 
+    import os
+
     print("SERVER STARTED")
 
     app.run(
         host="0.0.0.0",
-        port=5050,
+        port=int(os.environ.get("PORT", 10000)),
         debug=True
     )
