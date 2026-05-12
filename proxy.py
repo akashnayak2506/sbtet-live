@@ -311,7 +311,7 @@ def classresults():
         except:
             return None
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=50) as executor:
 
         results = list(
             executor.map(
