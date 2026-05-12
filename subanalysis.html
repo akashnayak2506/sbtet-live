@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sub Analysis</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+background:
+radial-gradient(circle at bottom,#0b1d4d,#07122e 60%);
+color:white;
+padding:20px;
+}
+
+.card{
+background:rgba(255,255,255,0.05);
+border-radius:30px;
+padding:25px;
+border:1px solid rgba(255,255,255,0.08);
+}
+
+.title{
+font-size:38px;
+font-weight:bold;
+margin-bottom:25px;
+}
+
+.market{
+margin-top:25px;
+padding:25px;
+border-radius:30px;
+background:linear-gradient(
+180deg,
+rgba(0,255,255,0.08),
+rgba(0,100,255,0.08)
+);
+border:1px solid rgba(0,255,255,0.2);
+}
+
+.markettitle{
+font-size:34px;
+font-weight:bold;
+margin-bottom:25px;
+}
+
+.items{
+display:flex;
+gap:15px;
+overflow:auto;
+}
+
+.item{
+min-width:150px;
+height:180px;
+border-radius:20px;
+border:2px dashed rgba(0,255,255,0.3);
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:10px;
+font-size:28px;
+}
+
+.btn{
+width:100%;
+padding:22px;
+border:none;
+border-radius:40px;
+margin-top:30px;
+font-size:28px;
+font-weight:bold;
+color:white;
+background:linear-gradient(to right,#06b6d4,#2563eb);
+}
+
+canvas{
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="title">
+Current Performance (Latest Sem)
+</div>
+
+<canvas id="chart"></canvas>
+
+</div>
+
+
+<script>
+
+const ctx =
+document.getElementById('chart');
+
+new Chart(ctx, {
+
+type: 'bar',
+
+data: {
+
+labels: [
+'Topper',
+'Avg',
+'Low',
+'You'
+],
+
+datasets: [{
+
+label: 'SGPA',
+
+data: [
+9.8,
+7.2,
+5.6,
+6.0
+],
+
+backgroundColor: [
+'#00e5ff',
+'#8b5cf6',
+'#ef4444',
+'#f97316'
+],
+
+borderRadius: 10
+
+}]
+
+},
+
+options: {
+
+plugins:{
+legend:{
+display:false
+}
+},
+
+scales: {
+
+y: {
+
+min:5,
+max:10,
+
+ticks:{
+color:'white'
+},
+
+grid:{
+color:'rgba(255,255,255,0.1)'
+}
+
+},
+
+x:{
+
+ticks:{
+color:'white'
+},
+
+grid:{
+display:false
+}
+
+}
+
+}
+
+}
+
+});
+
+</script>
+
+</body>
+</html>

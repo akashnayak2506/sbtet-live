@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Signup</title>
+
+<style>
+
+body{
+background:#07122e;
+color:white;
+font-family:Arial;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.box{
+background:#111c44;
+padding:40px;
+border-radius:25px;
+width:330px;
+}
+
+h1{
+margin-bottom:25px;
+}
+
+input{
+width:100%;
+padding:18px;
+margin-top:15px;
+border:none;
+border-radius:15px;
+background:#1e293b;
+color:white;
+font-size:18px;
+}
+
+button{
+width:100%;
+padding:18px;
+margin-top:20px;
+border:none;
+border-radius:30px;
+background:#00ff88;
+font-size:22px;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+<h1>Create Account</h1>
+
+<input
+id="pin"
+placeholder="PIN">
+
+<input
+id="pass"
+type="password"
+placeholder="Password">
+
+<button onclick="signup()">
+SIGN UP
+</button>
+
+</div>
+
+<script>
+
+function signup(){
+
+let pin =
+document
+.getElementById("pin")
+.value;
+
+let pass =
+document
+.getElementById("pass")
+.value;
+
+if(!pin || !pass){
+
+alert("Fill all fields");
+return;
+
+}
+
+localStorage.setItem(
+"pass_" + pin,
+pass
+);
+
+alert(
+"Account Created"
+);
+
+window.location.href =
+"index.html";
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Class Results</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+background:
+radial-gradient(circle at bottom,#0b1d4d,#07122e 60%);
+color:white;
+}
+
+.top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:25px;
+border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.left{
+display:flex;
+align-items:center;
+gap:20px;
+font-size:20px;
+font-weight:bold;
+}
+
+.back{
+font-size:35px;
+cursor:pointer;
+}
+
+.excel{
+background:#10b981;
+padding:15px 25px;
+border-radius:30px;
+font-size:20px;
+font-weight:bold;
+border:none;
+color:white;
+}
+
+.table{
+padding:20px;
+}
+
+.header{
+display:grid;
+grid-template-columns:1fr 2fr 3fr 1fr;
+background:#0f3b53;
+padding:20px;
+border-radius:15px 15px 0 0;
+font-weight:bold;
+font-size:20px;
+color:#00e5ff;
+}
+
+.row{
+display:grid;
+grid-template-columns:1fr 2fr 3fr 1fr;
+padding:25px 20px;
+border-bottom:1px solid rgba(255,255,255,0.08);
+background:rgba(255,255,255,0.03);
+font-size:18px;
+align-items:center;
+}
+
+.rank{
+font-weight:bold;
+}
+
+.gold{
+color:gold;
+}
+
+.silver{
+color:silver;
+}
+
+.bronze{
+color:#cd7f32;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="top">
+
+<div class="left">
+
+<div class="back" onclick="goBack()">
+←
+</div>
+
+<div>
+Class Results
+</div>
+
+</div>
+
+<button class="excel">
+📗 Excel
+</button>
+
+</div>
+
+<div class="table">
+
+<div class="header">
+
+<div>RANK</div>
+<div>PIN</div>
+<div>NAME</div>
+<div>SGPA</div>
+
+</div>
+
+<div id="results"></div>
+
+</div>
+
+<script>
+
+async function loadData(){
+
+const results =
+document.getElementById("results");
+
+results.innerHTML =
+"Loading...";
+
+const pin =
+localStorage.getItem("student_pin");
+
+try{
+
+const response = await fetch(
+"http://localhost:5050/api/classresults",
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+pin:pin
+})
+}
+);
+
+const students =
+await response.json();
+
+results.innerHTML = "";
+
+students.forEach((s,index)=>{
+
+results.innerHTML += `
+
+<div class="row">
+
+<div class="rank">
+#${index+1}
+</div>
+
+<div>
+${s.pin}
+</div>
+
+<div>
+${s.name}
+</div>
+
+<div>
+${s.sgpa}
+</div>
+
+</div>
+
+`;
+
+});
+
+}catch(err){
+
+results.innerHTML =
+"Server Error";
+
+console.log(err);
+
+}
+
+}
+
+loadData();
+
+function goBack(){
+
+window.location.href =
+"dashboard.html";
+
+}
+
+</script>
+
+
+
+</body>
+</html>

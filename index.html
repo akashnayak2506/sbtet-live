@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SBTET LIVE</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:
+radial-gradient(circle at bottom,#0b1d4d,#07122e 60%);
+color:white;
+}
+
+.card{
+width:340px;
+padding:35px;
+border-radius:30px;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.08);
+box-shadow:0 0 40px rgba(0,0,0,0.4);
+}
+
+.title{
+font-size:60px;
+font-weight:bold;
+line-height:1;
+}
+
+.sub{
+margin-top:25px;
+color:#9ca3af;
+text-align:center;
+}
+
+input{
+width:100%;
+padding:18px;
+margin-top:18px;
+border:none;
+border-radius:15px;
+background:#1e293b;
+color:white;
+font-size:18px;
+outline:none;
+}
+
+button{
+width:100%;
+padding:18px;
+margin-top:20px;
+border:none;
+border-radius:30px;
+background:
+linear-gradient(to right,#06b6d4,#2563eb);
+color:white;
+font-size:24px;
+font-weight:bold;
+}
+
+.admin{
+margin-top:20px;
+text-align:center;
+color:#00e5ff;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.signup{
+margin-top:20px;
+text-align:center;
+font-size:18px;
+}
+
+.signup span{
+color:#00e5ff;
+font-weight:bold;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="title">
+Welcome<br>
+back
+</div>
+
+<div class="sub">
+Login with your PIN
+</div>
+
+<input
+id="pin"
+placeholder="Enter PIN">
+
+<input
+id="pass"
+type="password"
+placeholder="Password">
+
+<button
+onclick="login()">
+SIGN IN
+</button>
+
+<div
+class="admin"
+onclick="window.location.href='adminpanel.html'">
+
+🔒 Open Admin Panel
+
+</div>
+
+<div class="signup">
+
+Don't have an account?
+
+<span
+onclick="window.location.href='signup.html'">
+
+Sign Up
+
+</span>
+
+</div>
+
+</div>
+
+<script>
+
+function login(){
+
+let pin =
+document
+.getElementById(
+"pin"
+)
+.value;
+
+let pass =
+document
+.getElementById(
+"pass"
+)
+.value;
+
+let savedPass =
+localStorage.getItem(
+"pass_" + pin
+);
+
+if(!savedPass){
+
+alert(
+"Please Sign Up First"
+);
+
+return;
+
+}
+
+if(pass != savedPass){
+
+alert(
+"Wrong Password"
+);
+
+return;
+
+}
+
+localStorage.setItem(
+"student_pin",
+pin
+);
+
+window.location.href =
+"dashboard.html";
+
+}
+
+</script>
+
+</body>
+</html>

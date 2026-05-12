@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Resume Gen</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+background:#0f172a;
+color:white;
+}
+
+.top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:25px;
+border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.left{
+display:flex;
+align-items:center;
+gap:20px;
+}
+
+.back{
+font-size:35px;
+cursor:pointer;
+}
+
+.title{
+font-size:24px;
+font-weight:bold;
+}
+
+.download{
+padding:18px 30px;
+border-radius:30px;
+background:#00e5ff;
+color:black;
+font-size:22px;
+font-weight:bold;
+}
+
+.tabs{
+display:flex;
+gap:20px;
+padding:20px;
+}
+
+.tab{
+flex:1;
+padding:20px;
+text-align:center;
+border-radius:20px;
+font-size:22px;
+font-weight:bold;
+background:#1e293b;
+}
+
+.active{
+background:#00e5ff;
+color:black;
+}
+
+.resume{
+margin:20px;
+background:white;
+color:black;
+padding:40px;
+border-radius:10px;
+}
+
+.name{
+font-size:60px;
+font-weight:bold;
+text-align:center;
+}
+
+.contact{
+margin-top:20px;
+text-align:center;
+font-size:22px;
+line-height:1.8;
+}
+
+.line{
+height:4px;
+background:black;
+margin:30px 0;
+}
+
+.heading{
+font-size:36px;
+font-weight:bold;
+margin-bottom:20px;
+}
+
+.text{
+font-size:24px;
+line-height:1.7;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+td,th{
+border:2px solid #999;
+padding:18px;
+font-size:22px;
+}
+
+.skills{
+display:flex;
+flex-wrap:wrap;
+gap:15px;
+margin-top:20px;
+}
+
+.skill{
+padding:12px 20px;
+border-radius:12px;
+background:#eee;
+font-size:22px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="top">
+
+<div class="left">
+
+<div class="back"
+onclick="goBack()">
+←
+</div>
+
+<div class="title">
+Resume Gen
+</div>
+
+</div>
+
+<div class="download"
+onclick="window.print()">
+📄 Download
+</div>
+
+</div>
+
+<div class="tabs">
+
+<div class="tab"
+onclick="
+document.getElementById('editBox').style.display='block'
+">
+Edit Details
+</div>
+
+<div class="tab active">
+View Resume
+</div>
+
+</div>
+
+<div class="resume">
+<div id="editBox"
+style="
+display:none;
+background:white;
+margin:20px;
+padding:25px;
+border-radius:20px;
+">
+
+<input
+id="editName"
+placeholder="Full Name"
+style="
+width:100%;
+padding:18px;
+margin-bottom:15px;
+font-size:18px;
+">
+
+<input
+id="editPhone"
+placeholder="Phone"
+style="
+width:100%;
+padding:18px;
+margin-bottom:15px;
+font-size:18px;
+">
+
+<input
+id="editEmail"
+placeholder="Email"
+style="
+width:100%;
+padding:18px;
+margin-bottom:15px;
+font-size:18px;
+">
+
+<textarea
+id="editObjective"
+placeholder="Objective"
+style="
+width:100%;
+padding:18px;
+height:120px;
+font-size:18px;
+margin-bottom:15px;
+"></textarea>
+
+<button
+onclick="saveResume()"
+style="
+width:100%;
+padding:20px;
+border:none;
+border-radius:30px;
+background:#00e5ff;
+font-size:22px;
+font-weight:bold;
+">
+SAVE DETAILS
+</button>
+
+</div>
+
+<div class="name"
+id="name">
+<span id="resumeName">
+Loading...
+</span>
+</div>
+
+<div class="contact">
+
+
+
+<br><br>
+
+
+
+<br><br>
+
+🔗 linkedin.com
+
+</div>
+
+<div class="line"></div>
+
+<div class="heading">
+OBJECTIVE
+</div>
+
+<div class="text">
+
+Final year Diploma student passionate about Technology.
+Looking for an entry-level role to utilize my skills.
+
+</div>
+
+<br><br>
+
+<div class="heading">
+EDUCATION
+</div>
+
+<table>
+
+<tr>
+
+<th>Course</th>
+<th>Institution</th>
+<th>Year</th>
+<th>Grade</th>
+
+</tr>
+
+<tr>
+
+<td>Diploma</td>
+
+<td>Govt Polytechnic</td>
+
+<td>2023-2026</td>
+
+<td>--</td>
+
+</tr>
+
+<tr>
+
+<td>SSC</td>
+
+<td>State Board</td>
+
+<td>2023</td>
+
+<td>Pass</td>
+
+</tr>
+
+</table>
+
+<br><br>
+
+<div class="heading">
+TECHNICAL SKILLS
+</div>
+
+<div class="skills">
+
+<div class="skill">
+Java
+</div>
+
+<div class="skill">
+C
+</div>
+
+<div class="skill">
+HTML
+</div>
+
+<div class="skill">
+CSS
+</div>
+
+<div class="skill">
+MySQL
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function goBack(){
+
+window.location.href =
+"dashboard.html";
+
+}
+
+const pin =
+localStorage.getItem(
+"student_pin"
+);
+
+if(pin){
+
+const savedName =
+localStorage.getItem(
+"studentName"
+);
+
+if(savedName){
+
+document
+.getElementById(
+"resumeName"
+)
+.innerHTML =
+savedName;
+
+}
+}
+)
+
+.then(r=>r.json())
+
+.then(data=>{
+
+document
+.getElementById(
+"resumeName"
+)
+.innerHTML =
+data.name;
+
+});
+
+}
+
+<div id="editBox"
+style="
+display:none;
+background:white;
+margin:20px;
+padding:25px;
+border-radius:20px;
+">
+
+<input
+id="editName"
+placeholder="Full Name"
+style="
+width:100%;
+padding:18px;
+margin-bottom:15px;
+font-size:18px;
+">
+
+<input
+id="editPhone"
+placeholder="Phone"
+style="
+width:100%;
+padding:18px;
+margin-bottom:15px;
+font-size:18px;
+">
+
+<input
+id="editEmail"
+placeholder="Email"
+style="
+width:100%;
+padding:18px;
+margin-bottom:15px;
+font-size:18px;
+">
+
+<textarea
+id="editObjective"
+placeholder="Objective"
+style="
+width:100%;
+padding:18px;
+height:120px;
+font-size:18px;
+margin-bottom:15px;
+"></textarea>
+
+<button
+onclick="saveResume()"
+style="
+width:100%;
+padding:20px;
+border:none;
+border-radius:30px;
+background:#00e5ff;
+font-size:22px;
+font-weight:bold;
+">
+SAVE DETAILS
+</button>
+
+</div>
+</script>
+
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Report</title>
+
+<style>
+
+body{
+background:#07122e;
+color:white;
+font-family:Arial;
+padding:20px;
+}
+
+.card{
+background:#111c44;
+padding:20px;
+border-radius:20px;
+margin-bottom:20px;
+}
+
+.name{
+font-size:40px;
+font-weight:bold;
+color:#00e5ff;
+}
+
+.pin{
+font-size:22px;
+color:#ccc;
+margin-top:10px;
+}
+
+.sem{
+margin-top:30px;
+font-size:35px;
+color:#ff00ff;
+font-weight:bold;
+}
+
+.table{
+margin-top:15px;
+border-radius:20px;
+overflow:hidden;
+}
+
+.header,
+.row{
+display:grid;
+grid-template-columns:3fr 1fr 1fr 1fr 1fr;
+padding:18px;
+}
+
+.header{
+background:#4338ca;
+font-weight:bold;
+}
+
+.row{
+background:#0f172a;
+border-top:1px solid rgba(255,255,255,0.08);
+}
+
+.sgpa{
+text-align:right;
+padding:15px;
+font-size:22px;
+font-weight:bold;
+color:#00ffcc;
+background:#0f172a;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="name" id="name">
+Loading...
+</div>
+
+<div class="pin" id="pin">
+Loading...
+</div>
+
+<div style="margin-top:20px;color:#00ff88;font-size:24px"
+id="credits">
+0 Credits
+</div>
+
+</div>
+
+<div id="subjects"></div>
+
+<script>
+
+async function loadReport(){
+
+try{
+
+const pin =
+localStorage.getItem("student_pin");
+
+const response = await fetch(
+"http://localhost:5050/api/fullreport",
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+pin:pin
+})
+}
+);
+
+const data =
+await response.json();
+
+document.getElementById("name")
+.innerHTML = data.name;
+
+document.getElementById("pin")
+.innerHTML = data.pin;
+
+document.getElementById("credits")
+.innerHTML =
+data.credits + " Credits";
+
+const main =
+document.getElementById("subjects");
+
+main.innerHTML = "";
+
+data.semesters.forEach(sem=>{
+
+main.innerHTML += `
+
+<div class="sem">
+SEMESTER ${sem.sem}
+</div>
+
+<div class="table">
+
+<div class="header">
+
+<div>SUBJECT</div>
+<div>M1</div>
+<div>M2</div>
+<div>INT</div>
+<div>END</div>
+
+</div>
+
+${sem.subjects.map(s=>`
+
+<div class="row">
+
+<div>${s.subject}</div>
+<div>${s.m1}</div>
+<div>${s.m2}</div>
+<div>${s.internal}</div>
+<div>${s.end}</div>
+
+</div>
+
+`).join("")}
+
+<div class="sgpa">
+SGPA : ${sem.sgpa}
+</div>
+
+</div>
+
+`;
+
+});
+
+}catch(err){
+
+alert("Backend Error");
+
+console.log(err);
+
+}
+
+}
+
+loadReport();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SBTET LIVE</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:
+radial-gradient(circle at bottom,#0b1d4d,#07122e 60%);
+}
+
+.box{
+width:95%;
+max-width:400px;
+padding:35px;
+border-radius:25px;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,0.1);
+}
+
+.title{
+text-align:center;
+font-size:48px;
+font-weight:bold;
+background:linear-gradient(to right,#38bdf8,#8b5cf6);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+margin-bottom:40px;
+}
+
+.label{
+color:#d1d5db;
+margin-bottom:12px;
+font-size:20px;
+}
+
+.pin{
+width:100%;
+padding:22px;
+border-radius:22px;
+border:2px solid #06b6d4;
+background:#111827;
+font-size:30px;
+color:white;
+text-align:center;
+outline:none;
+box-shadow:0 0 25px rgba(6,182,212,0.5);
+}
+
+.btn{
+width:100%;
+padding:20px;
+margin-top:35px;
+border:none;
+border-radius:40px;
+font-size:24px;
+font-weight:bold;
+color:white;
+background:linear-gradient(to right,#a21caf,#22d3ee);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+<div class="title">SBTET LIVE</div>
+
+<div class="label">ENTER PIN</div>
+
+<input
+id="pin"
+class="pin"
+type="text"
+placeholder="23007-CS-041">
+
+<button class="btn" onclick="showmsg()">
+GET ANALYSIS
+</button>
+
+</div>
+
+<script>
+
+function showmsg(){
+
+const pin =
+document.getElementById("pin").value
+.trim()
+.toUpperCase();
+
+alert(pin);
+
+localStorage.setItem(
+"student_pin",
+pin
+);
+
+window.location.href =
+"dashboard.html";
+
+}
+
+</script>
+
+</body>
+</html>

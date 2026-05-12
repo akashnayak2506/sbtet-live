@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Dashboard</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+background:
+radial-gradient(circle at bottom,#0b1d4d,#07122e 60%);
+color:white;
+padding:20px;
+}
+
+.title{
+font-size:40px;
+font-weight:bold;
+margin-bottom:25px;
+}
+
+.card{
+background:rgba(255,255,255,0.05);
+padding:25px;
+border-radius:25px;
+border:1px solid rgba(255,255,255,0.08);
+margin-bottom:25px;
+}
+
+.section{
+font-size:28px;
+font-weight:bold;
+margin-bottom:20px;
+}
+
+.tools{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+}
+
+.tool{
+padding:30px 15px;
+background:#18254f;
+border-radius:20px;
+text-align:center;
+font-size:20px;
+}
+
+input,
+textarea{
+width:100%;
+padding:18px;
+margin-top:15px;
+border:none;
+border-radius:15px;
+background:#1e293b;
+color:white;
+font-size:18px;
+outline:none;
+}
+
+button{
+width:100%;
+padding:18px;
+margin-top:20px;
+border:none;
+border-radius:30px;
+background:
+linear-gradient(to right,#06b6d4,#2563eb);
+color:white;
+font-size:22px;
+font-weight:bold;
+}
+
+.notice{
+padding:18px;
+background:#18254f;
+border-radius:15px;
+margin-top:15px;
+font-size:18px;
+}
+
+.user{
+padding:18px;
+background:#18254f;
+border-radius:15px;
+margin-top:15px;
+font-size:18px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="title">
+Admin Dashboard
+</div>
+
+<div class="card">
+
+<div class="section">
+Admin Tools
+</div>
+
+<div class="tools">
+
+<div class="tool">
+👨‍🎓<br><br>
+Student Accounts
+</div>
+
+<div class="tool">
+📚<br><br>
+Upload Papers
+</div>
+
+<div class="tool">
+📢<br><br>
+Notices
+</div>
+
+<div class="tool">
+🔒<br><br>
+Reset Passwords
+</div>
+
+<div class="tool">
+📊<br><br>
+Class Reports
+</div>
+
+<div class="tool">
+📁<br><br>
+Study Materials
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="section">
+Post Notice
+</div>
+
+<textarea
+id="noticeText"
+placeholder="Enter notice here">
+</textarea>
+
+<button onclick="postNotice()">
+POST NOTICE
+</button>
+
+<div id="noticeList"></div>
+
+</div>
+
+<div class="card">
+
+<div class="section">
+Student Accounts
+</div>
+
+<div id="userList"></div>
+
+</div>
+
+<script>
+
+function postNotice(){
+
+let text =
+document
+.getElementById(
+"noticeText"
+)
+.value;
+
+if(!text){
+
+alert(
+"Enter notice"
+);
+
+return;
+
+}
+
+let notices =
+JSON.parse(
+localStorage.getItem(
+"notices"
+)
+) || [];
+
+notices.unshift(text);
+
+localStorage.setItem(
+"notices",
+JSON.stringify(notices)
+);
+
+loadNotices();
+
+}
+
+function loadNotices(){
+
+let notices =
+JSON.parse(
+localStorage.getItem(
+"notices"
+)
+) || [];
+
+const list =
+document
+.getElementById(
+"noticeList"
+);
+
+list.innerHTML = "";
+
+notices.forEach(n=>{
+
+list.innerHTML += `
+
+<div class="notice">
+${n}
+</div>
+
+`;
+
+});
+
+}
+
+loadNotices();
+
+function loadUsers(){
+
+const userList =
+document
+.getElementById(
+"userList"
+);
+
+userList.innerHTML = "";
+
+for(
+let i=0;
+i<localStorage.length;
+i++
+){
+
+let key =
+localStorage.key(i);
+
+if(
+key.startsWith(
+"pass_"
+)
+){
+
+let pin =
+key.replace(
+"pass_",
+""
+);
+
+userList.innerHTML += `
+
+<div class="user">
+👨‍🎓 ${pin}
+</div>
+
+`;
+
+}
+
+}
+
+}
+
+loadUsers();
+
+</script>
+
+</body>
+</html>
